@@ -5,7 +5,12 @@ export default function formatMoney(amount = 0) {
     minimumFunctionDigits: 2,
   };
 
+  // Check if it is a clean dollar amount
+  if (amount % 100 === 0) {
+    options.minimumFractionDigits = 0;
+  }
+
   const formatter = Intl.NumberFormat('en-US', options);
 
-  return formatter.format(amount);
+  return formatter.format(amount / 100);
 }
