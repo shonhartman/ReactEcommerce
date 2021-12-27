@@ -3,17 +3,29 @@ import Form from './styles/Form';
 
 export default function CreateProduct() {
   const { inputs, handleChange, clearForm, resetForm } = useForm({
+    image: '',
     name: 'nice shoes',
     price: 34234,
     description: 'these are the best',
   });
 
   return (
-    <Form>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log(inputs);
+      }}
+    >
       <fieldset>
         <label htmlFor="image">
           Image
-          <input type="file" id="image" name="image" onChange={handleChange} />
+          <input
+            required
+            type="file"
+            id="image"
+            name="image"
+            onChange={handleChange}
+          />
         </label>
         <label htmlFor="name">
           Name
@@ -39,8 +51,7 @@ export default function CreateProduct() {
         </label>
         <label htmlFor="description">
           Description
-          <input
-            type="text"
+          <textarea
             id="description"
             name="description"
             placeholder="Description"
@@ -48,9 +59,7 @@ export default function CreateProduct() {
             onChange={handleChange}
           />
         </label>
-        <button type="submit" onClick={clearForm}>
-          + Add Product
-        </button>
+        <button type="submit">+ Add Product</button>
       </fieldset>
     </Form>
   );
