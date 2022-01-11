@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import PropTypes from 'prop-types';
 import { ApolloProvider } from '@apollo/client';
 import NProgress from 'nprogress';
 import Router from 'next/router';
@@ -26,6 +28,12 @@ App.getInitialProps = async function ({ Component, ctx }) {
   }
   pageProps.query = ctx.query;
   return { pageProps };
+};
+
+App.propTypes = {
+  Component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  pageProps: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  apollo: PropTypes.any,
 };
 
 export default withData(App);
