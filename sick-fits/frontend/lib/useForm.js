@@ -7,7 +7,6 @@ export default function useForm(initial = {}) {
   function handleChange(e) {
     let { value, name, type } = e.target;
     if (type === 'number') {
-      console.log('type is number');
       value = parseInt(value);
     }
     if (type === 'file') {
