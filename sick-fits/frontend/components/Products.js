@@ -29,7 +29,6 @@ const ProductsListStyles = styled.div`
 `;
 
 export default function Products({ page }) {
-  console.log('type of page', typeof page);
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY, {
     variables: {
       skip: page * perPage - perPage,
@@ -54,5 +53,5 @@ export default function Products({ page }) {
 }
 
 Products.propTypes = {
-  page: PropTypes.any,
+  page: PropTypes.number,
 };
