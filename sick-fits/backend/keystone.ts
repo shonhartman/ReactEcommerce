@@ -7,6 +7,7 @@ import { ProductImage } from "./schemas/ProductImage";
 import { withItemData,
   statelessSessions } from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
+import { CartItem } from './schemas/CartItem';
 
 const databaseURL =  process.env.DATABASE_URL || 'mongodb://localhost/keyston-sick-fits-tutorial';
 
@@ -51,7 +52,7 @@ export default withAuth(config({
     User,
     Product,
     ProductImage,
-    // Schema items should go here
+    CartItem
   }),
   ui: {
     // Show the UI only to someone who passes this test
