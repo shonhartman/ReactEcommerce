@@ -36,10 +36,10 @@ export default function Reset({ token }) {
   const successfulError = data?.redeemUserPasswordResetToken?.code
     ? data?.redeemUserPasswordResetToken?.code
     : undefined;
-  console.log('error', error)
   async function handleSubmit(e) {
     e.preventDefault();
     const res = await reset().catch(console.log(error));
+    console.log('res in Reset function', res);
     resetForm();
   }
 

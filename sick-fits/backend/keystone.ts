@@ -8,6 +8,7 @@ import { withItemData,
   statelessSessions } from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
 import { CartItem } from './schemas/CartItem';
+import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =  process.env.DATABASE_URL || 'mongodb://localhost/keyston-sick-fits-tutorial';
 
@@ -26,7 +27,8 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     async sendToken(args) {
-      console.log('args', args);
+      // send the email
+      await sendPasswordResetEmail(args.token, args.identity);
     }
   }
 })
@@ -57,7 +59,6 @@ export default withAuth(config({
   ui: {
     // Show the UI only to someone who passes this test
     isAccessAllowed: ({ session }) => { 
-      console.log( session );
       return !!session?.data;
     },
   },

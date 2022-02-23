@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import CartStyles from './styles/CartStyles';
 import Supreme from './styles/Supreme';
-import formatMoney from '../lib/formatMoney';
 import { useUser } from './User';
-import calcTotalPrice from '../lib/calcTotalPrice';
 
 const CartItemStyles = styled.li`
   padding: 1rem 0;
@@ -21,34 +19,20 @@ const CartItemStyles = styled.li`
 
 function CartItem({ cartItem }) {
   const { product } = cartItem;
-  if (!product) return null;
-  console.log(product);
   return (
     <CartItemStyles>
-      <img
-        width="100"
-        src={product.photo.image.publicUrlTransformed}
-        alt={product.name}
-      />
-      <div>
-        <h3>{product.name}</h3>
-        <p>
-          {formatMoney(product.price * cartItem.quantity)}-
-          <em>
-            {cartItem.quantity} &times; {formatMoney(product.price)} each
-          </em>
-        </p>
-      </div>
+      <img alt="alt" src={product?.image?.publicUrlTransformed} />
     </CartItemStyles>
   );
 }
 
 export default function Cart() {
   const me = useUser();
-  if (!me) return null;
-  console.log(me);
+  if (!me) {
+    return null;
+  }
   return (
-    <CartStyles open>
+    <CartStyles open={false}>
       <header>
         <Supreme>{me.name}'s Cart</Supreme>
       </header>
@@ -57,9 +41,6 @@ export default function Cart() {
           <CartItem key={cartItem.id} cartItem={cartItem} />
         ))}
       </ul>
-      <footer>
-        <p>{formatMoney(calcTotalPrice(me.cart))}</p>
-      </footer>
     </CartStyles>
   );
 }
