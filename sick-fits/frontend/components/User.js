@@ -14,13 +14,13 @@ export const CURRENT_USER_QUERY = gql`
           product {
             id
             price
+            name
+            description
             photo {
               image {
                 publicUrlTransformed
               }
             }
-            name
-            description
           }
         }
       }
